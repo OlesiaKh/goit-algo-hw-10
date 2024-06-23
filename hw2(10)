@@ -1,0 +1,18 @@
+import numpy as np
+import scipy.integrate as spi
+
+def f(x):
+    return x ** 2
+
+a, b = 0, 2
+
+num_samples = 100_000
+x_random = np.random.uniform(a, b, num_samples)
+y_random = np.random.uniform(0, f(b), num_samples)
+
+
+under_curve = np.sum(y_random < f(x_random))
+area_under_curve = (b - a) * f(b) * under_curve / num_samples
+result, error = spi.quad(f, a, b)
+
+print(area_under_curve, result)
